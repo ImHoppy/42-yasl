@@ -1,0 +1,11 @@
+#!yasl_linux
+!!
+{
+
+	0:=:2
+	2:print:0
+} print_args
+(# 2 <) ? (1 exit)
+// 0:=:1
+!
+# (#print_args !)

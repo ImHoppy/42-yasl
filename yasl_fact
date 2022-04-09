@@ -1,5 +1,43 @@
+#!yasl_linux
+!!
+
 {
-	=
-	
+	0:=
 	*
 } mul
+
+{
+	1
+	-
+} decrement
+
+{	
+	"Correct usage:\n yasl_fact <positive num>\n"
+	print
+	1 exit
+} error
+
+{
+	[#]
+	%@ (
+		decrement
+		%]#[ "0" < ? error
+		%]#[ "9" > ? error
+	)
+} check_int
+
+0:=:4
+
+4:check_int:4
+
+(# 1 !=) ? error
+0 +
+(20 %>) ? error : !
+
+// # #("\n" + print)
+1:1
+%@ (
+	1:mul:1
+	decrement
+)
+1:print

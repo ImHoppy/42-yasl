@@ -1,0 +1,43 @@
+#!resources/yasl_linux
+!!
+{
+	1
+	-
+} decrement
+
+{
+	1
+	+
+} increment
+
+{ = "\n" + print} printf
+{
+	[#] // max
+	%@ (
+		// printf
+		1 -
+		// printf
+		%]#[
+		// printf
+		3:=
+		%!=
+		// printf
+		// # #("::" + print)
+		// "\n" print
+		?(! =:4 ! 4:+:4) : (!! "":4)
+		// 1:increment:1
+		
+	)
+} while_add
+
+
+(# 2 !=) ? ("Wrong ags\n" print 1 exit)
+
+
+0:=:3 ! // separator
+0:=:2 ! // String
+0:1 // i
+"":4
+
+2:while_add:2
+4:(# #([#] 0 == ? (! "\n") print  )):4

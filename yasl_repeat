@@ -20,10 +20,21 @@
 )
 } print_args
 
+{
+	[#]
+	%@ (
+		1 -
+		%]#[ "0" < ? ("Not a int\n" print 1 exit)
+		%]#[ "9" > ? ("Not a int\n" print 1 exit)
+	)
+} check_int
 
 
 (# 2 <) ? ("Wrong ags\n" print 1 exit)
+=:4
+4:check_int:4
 (0 %<=) ? ("Not positive\n" print 1 exit)
+
 
 0:+:3
 0:=:2

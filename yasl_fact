@@ -26,11 +26,10 @@
 	)
 } check_int
 
-0:=:4
-
-4:check_int:4
 
 (# 1 !=) ? error
+0:=:4
+4:check_int:4
 0 +
 (20 %>) ? error : !
 

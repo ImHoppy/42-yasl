@@ -21,8 +21,10 @@
 } print_args
 
 
+
 (# 2 <) ? ("Wrong ags\n" print 1 exit)
 (0 %<=) ? ("Not positive\n" print 1 exit)
+
 0:+:3
 0:=:2
 # #(

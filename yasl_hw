@@ -1,5 +1,5 @@
 #!resources/yasl_linux
 #!
-"Hello world"
+"Hello world\n"
 #
 #print

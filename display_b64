@@ -1,0 +1,159 @@
+#!resources/yasl_linux
+# #!
+
+{	
+	"Correct usage:\n yasl_split\n"
+	print
+	1 exit
+} error
+
+{	
+	"Square not found\n"
+	print
+	1 exit
+} error_square
+
+{	
+	"Not base64\n"
+	print
+	1 exit
+} error_b64
+
+{
+	#
+	0
+	%!= ? (! #!)
+} clear_stack
+
+{
+	1
+	-
+} decrement
+
+{
+	1
+	+
+} increment
+
+{
+	1
+	@ (
+		read
+		0 %!= ? (! =:1 1:+:1 ! + 1) : (!)
+	)
+	!
+} get_image
+
+{
+	=
+	4 /
+} nbr_pixel
+
+{	// could be bugged for / 4 if approx
+	1:=:7		// n char
+	4:7 7:/:7	// 
+	1:8			// stockage
+	1:9			// bool
+
+	9:%@ (
+		8:(
+			=											// 1 1
+			%*											// 1 1 1
+			7:=											// 1 1 1 1024
+			%==											// (1 == 1024)
+			?	(9:! 0:9 "Found square : " print !!! =:4 print)		// if (square == char) bool == 0
+			: (												// else
+				%> ? (error_square)						// (1 > 1024) ? error
+				!!!											// 1
+				increment				
+			)
+		):8
+	)
+	7:!
+	9:!
+} is_square
+
+
+{
+	"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+} base
+
+{
+	6:%][:7
+	7:!
+	64:9
+	1:8
+	8:%@(
+		9:decrement:9
+		0:=:7 7:==:7 7:?
+		(
+			9:=:5
+			8:! 0:8 // Stop loop
+		):
+		( 9:=:9 0:9 9:==:9 9:? (0:error_b64:0) )
+	)
+	0:! 8:!
+} to_int
+
+0:1
+"":0
+get_image
+
+
+// 0:= 0:!:0
+// 0 %== ? (error) : (!)
+
+1:(
+	1:nbr_pixel:1
+	"Image received, nb pixels : "
+	2 #print
+	"\n" print
+	8:is_square:8
+	"\n" print
+):1
+
+0:(
+	base:6
+	][
+	#(0:to_int:5)
+	7:clear_stack:7
+	8:clear_stack:8
+):0
+
+// 5:(# #(print " " print)):5
+
+5:(
+	0:8
+	# 4 / #(
+		//= print " ":0 0:print
+		
+		5:(
+		18:5 5:<<:2
+		12:5 5:<<:2
+		6:5 5:<<:2
+		0:5 5:<<:2
+		2:(
+			2:+:2
+			2:+:2
+			2:+:2
+		):2
+		):5
+
+		2:=:5
+		2:!
+
+		255:5 5:%&:0 5:!
+		255:5 8:5 5:<<:5 5:%&:0 5:! 8:0 0:>>:0
+		255:5 16:5 5:<<:5 5:%&:0 5:! 16:0 0:>>:0
+
+
+		9:(16 36 0:= 0:! 6 * 256 / *
+			6 0:= 0:! 6 * 256 / *
+			0:= 0:! 6 * 256
+			/ + + + =:0 9:!):9
+		9:("\e[48:5:" (0:= 0:! "" +) + "m  " + print):9
+		8:(1 + = 4:= == ? ("\e[0m\n" print # #! 0)):8
+		
+		5:!
+	)
+):5
